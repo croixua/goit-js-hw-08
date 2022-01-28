@@ -49,9 +49,12 @@ function updateOutput() {
 
 function onSubmit(e) {
   e.preventDefault();
+
   console.log(JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY)));
+
   feedbackFormState.email = '';
   feedbackFormState.message = '';
   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(feedbackFormState));
+
   formRef.reset();
 }
