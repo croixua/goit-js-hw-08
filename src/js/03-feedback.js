@@ -50,6 +50,12 @@ function updateOutput() {
 function onSubmit(e) {
   e.preventDefault();
 
+  if (emailRef.value === '' || messageRef.value === '') {
+    alert('Заполни все поля!');
+
+    return;
+  }
+
   console.log(JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY)));
 
   feedbackFormState.email = '';
