@@ -41,6 +41,7 @@ function updateOutput() {
   try {
     const savedFormState = localStorage.getItem(LOCALSTORAGE_KEY);
     const parsedFormState = JSON.parse(savedFormState);
+
     emailRef.value = `${parsedFormState.email}`;
     messageRef.value = `${parsedFormState.message}`;
   } catch (error) {}
