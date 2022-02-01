@@ -1,4 +1,4 @@
-import Throttle from 'lodash.throttle';
+import throttle from 'lodash.throttle';
 const formRef = document.querySelector('.feedback-form');
 const emailRef = formRef.elements.email;
 const messageRef = formRef.elements.message;
@@ -11,40 +11,23 @@ const feedbackFormState = {
   message: '',
 };
 
-emailRef.addEventListener('input', Throttle(setFormEmail, 500));
-messageRef.addEventListener('input', Throttle(setFormMessage, 500));
+formRef.addEventListener('input', throttle(setFormInput, 500));
 formRef.addEventListener('submit', onSubmit);
 
-function setFormMessage() {
-  feedbackFormState.message = messageRef.value;
-
-  if (emailRef.value !== '') {
+function setFormInput() {
+  if (emailRef.value !== '' || messageRef.value !== '') {
     feedbackFormState.email = emailRef.value;
-  }
-  try {
-    localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(feedbackFormState));
-  } catch (error) {}
-}
-
-function setFormEmail() {
-  feedbackFormState.email = emailRef.value;
-  if (messageRef.value !== '') {
     feedbackFormState.message = messageRef.value;
   }
-
-  try {
-    localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(feedbackFormState));
-  } catch (error) {}
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(feedbackFormState));
 }
 
 function updateOutput() {
-  try {
-    const savedFormState = localStorage.getItem(LOCALSTORAGE_KEY);
-    const parsedFormState = JSON.parse(savedFormState);
+  const savedFormState = localStorage.getItem(LOCALSTORAGE_KEY);
+  const parsedFormState = JSON.parse(savedFormState);
 
-    emailRef.value = `${parsedFormState.email}`;
-    messageRef.value = `${parsedFormState.message}`;
-  } catch (error) {}
+  emailRef.value = parsedFormState.email;
+  messageRef.value = parsedFormState.message;
 }
 
 function onSubmit(e) {
