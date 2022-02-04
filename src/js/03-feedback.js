@@ -19,7 +19,7 @@ function setFormInput() {
     feedbackFormState.email = emailRef.value;
     feedbackFormState.message = messageRef.value;
   }
-  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(feedbackFormState));
+  localStorage.removeItem(LOCALSTORAGE_KEY);
 }
 
 function updateOutput() {
